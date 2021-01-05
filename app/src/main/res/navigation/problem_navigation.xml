@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/problem_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="ir.hadi_ahmadi.mystaggeredlistsample.fragment.HomeFragment"
+        android:label="HomeFragment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/destinationFragment"
+        android:name="ir.hadi_ahmadi.mystaggeredlistsample.fragment.DestinationFragment"
+        android:label="DestinationFragment">
+
+        <deepLink
+            android:id="@+id/testDeepLink"
+            app:uri="myapp://?test={test}" />
+
+    </fragment>
+
+</navigation>
