@@ -1,6 +1,7 @@
 package ir.hadi_ahmadi.mystaggeredlistsample.fragment
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,14 @@ import ir.hadi_ahmadi.mystaggeredlistsample.R
 import ir.hadi_ahmadi.mystaggeredlistsample.adapter.TestListAdapter
 import kotlinx.android.synthetic.main.fragment_test.*
 
+
 class TestFragment : Fragment() {
 
     private val testListAdapter: TestListAdapter by lazy {
         TestListAdapter()
     }
+
+    private var layoutManagerState: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +30,6 @@ class TestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         postListView.apply {
             layoutManager = StaggeredGridLayoutManager(
@@ -40,4 +43,21 @@ class TestFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        saveLayoutManagerState()
+        super.onPause()
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        restoreLayoutManagerState()
+    }
+
+    private fun restoreLayoutManagerState () {
+        layoutManagerState?.let { postListView.layoutManager?.onRestoreInstanceState(it) }
+    }
+
+    private fun saveLayoutManagerState () {
+        layoutManagerState = postListView.layoutManager?.onSaveInstanceState()
+    }
 }
