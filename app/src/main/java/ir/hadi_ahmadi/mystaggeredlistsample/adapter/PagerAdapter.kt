@@ -9,11 +9,10 @@ class PagerAdapter(fragmentManager: FragmentManager) :
     FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getCount(): Int {
-        return 2
+        return 5
     }
 
     override fun getItem(position: Int): Fragment {
         return TestFragment()
     }
-
 }
